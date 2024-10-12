@@ -10,7 +10,9 @@ final class AuthLoding extends AuthState {}
 final class AuthSuccess extends AuthState{
   final User user;
 
-  AuthSuccess({required this.user});
+  AuthSuccess({required this.user}){
+    print(user.toString());
+  }
 }
 
 final class AuthFailure extends AuthState{

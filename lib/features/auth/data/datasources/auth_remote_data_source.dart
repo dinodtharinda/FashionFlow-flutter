@@ -1,5 +1,6 @@
 import 'package:fashion_flow/core/error/exception.dart';
 import 'package:fashion_flow/features/auth/data/models/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 abstract interface class AuthRemoteDateSource {
   Future<UserModel> loginWithPassword(
@@ -13,17 +14,22 @@ class AuthRemoteDateSourceImpl implements AuthRemoteDateSource {
   Future<UserModel> loginWithPassword(
       {required String email, required String password}) async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      if (email != 'dinodtharinda2001@gmail.com' && password != '12345678') {
-        throw Exception('incorrect credentials');
+      final res = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      final user = res.user;
+      if (user == null) {
+        throw ServerException('User is null!');
       }
+
       return UserModel(
-          firstName: 'Dinod',
-          lastName: 'Tharinda',
-          email: 'dinodtharinda2001@gmail.com',
-          gender: 'male');
+        id: user.uid,
+        name: user.displayName ?? '',
+        email: user.email!,
+      );
     } on ServerException catch (e) {
       throw ServerException(e.message);
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message ?? 'firebase auth error!');
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -33,17 +39,22 @@ class AuthRemoteDateSourceImpl implements AuthRemoteDateSource {
   Future<UserModel> signUpWithPassword(
       {required String email, required String password}) async {
     try {
-      await Future.delayed(const Duration(seconds: 1));
-      if (email != 'dinodtharinda2001@gmail.com' && password != '12345678') {
-        throw ServerException('incorrect credentials');
+      final res = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      final user = res.user;
+      if (user == null) {
+        throw ServerException('User is null!');
       }
+
       return UserModel(
-          firstName: 'Dinod',
-          lastName: 'Tharinda',
-          email: 'dinodtharinda2001@gmail.com',
-          gender: 'male');
+        id: user.uid,
+        name: user.displayName ?? '',
+        email: user.email!,
+      );
     } on ServerException catch (e) {
       throw ServerException(e.message);
+    } on FirebaseAuthException catch (e) {
+      throw ServerException(e.message ?? 'firebase auth error!');
     } catch (e) {
       throw ServerException(e.toString());
     }

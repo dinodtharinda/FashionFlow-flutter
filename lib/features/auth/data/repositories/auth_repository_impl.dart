@@ -28,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, User>> signUpWithPassword(
       {required String email, required String password}) async {
     try {
-      final user = await remoteDateSource.loginWithPassword(
+      final user = await remoteDateSource.signUpWithPassword(
           email: email, password: password);
       return right(user);
     } on ServerException catch (e) {

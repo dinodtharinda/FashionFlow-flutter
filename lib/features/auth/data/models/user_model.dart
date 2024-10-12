@@ -1,10 +1,9 @@
 import 'package:fashion_flow/features/auth/domain/entities/user.dart';
 
 class UserModel extends User {
-  UserModel({
-    required super.firstName,
-    required super.lastName,
+  UserModel( {
+    required super.id,
+    required super.name,
     required super.email,
-    required super.gender,
   });
 }
