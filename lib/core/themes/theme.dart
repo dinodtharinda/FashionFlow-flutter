@@ -98,6 +98,7 @@ class AppTheme {
     ),
     textTheme: _textTheme(Colors.white),
     chipTheme: _chipTheme(AppPallete.backgroundColor, Colors.white),
+   
   );
 
   // Define the light theme mode using the default light theme.
