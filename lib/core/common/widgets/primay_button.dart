@@ -16,21 +16,20 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPress,
         style: ElevatedButton.styleFrom(
-          backgroundColor:
-              const Color.fromARGB(255, 255, 255, 255), // Background color
+          backgroundColor: Theme.of(context).primaryColorDark,
           shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(50), // Rounded corners with radius 50
+            borderRadius: BorderRadius.circular(50),
           ),
-          padding: const EdgeInsets.symmetric(
-              horizontal: 32, vertical: 16), // Adjust padding as needed
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          splashFactory: InkRipple.splashFactory,
+          
         ),
         child: Text(
           title,
-          style: const TextStyle(
-            color: Color.fromARGB(
-                255, 0, 0, 0), // Text color to contrast with black background
-            fontSize: 16, // Adjust font size if needed
+          style: TextStyle(
+            fontSize: 16,
+            color: Theme.of(context).primaryColorLight,
+            letterSpacing: 1.2
           ),
         ),
       ),

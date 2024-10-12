@@ -1,5 +1,5 @@
 import 'package:fashion_flow/core/themes/theme.dart';
-import 'package:fashion_flow/features/auth/presentation/pages/sign_up_page.dart';
+import 'package:fashion_flow/features/auth/presentation/pages/auth_option_page.dart';
 import 'package:fashion_flow/features/onboard/presentation/pages/onboard_page.dart';
 import 'package:flutter/material.dart';
 

@@ -62,8 +62,16 @@ class AppTheme {
 
   // Define the dark theme mode using the default dark theme.
   static final ThemeData darkThemeMode = ThemeData(
+    primaryColor: AppPallete.backgroundColorDark,
+    primaryColorDark: AppPallete.backgroundColor,
+    primaryColorLight: AppPallete.backgroundColorDark,
     brightness: Brightness.dark,
     fontFamily: _fontFamily,
+    splashColor: Colors.grey.withOpacity(0.2), // Custom splash color for dark theme
+    colorScheme: const ColorScheme.dark(
+      primary: AppPallete.backgroundColorDark,
+      secondary: Colors.grey
+    ),
   ).copyWith(
     scaffoldBackgroundColor: AppPallete.backgroundColorDark,
     appBarTheme: const AppBarTheme(
@@ -87,8 +95,16 @@ class AppTheme {
 
   // Define the light theme mode using the default light theme.
   static final ThemeData lightThemeMode = ThemeData(
+    primaryColor: AppPallete.backgroundColor,
+    primaryColorDark: AppPallete.backgroundColorDark,
+    primaryColorLight: AppPallete.backgroundColor,
     brightness: Brightness.light,
     fontFamily: _fontFamily,
+    splashColor: Colors.grey.withOpacity(0.2), // Custom splash color for light theme
+    colorScheme: const ColorScheme.light(
+      primary: AppPallete.backgroundColor,
+      secondary: Colors.grey, // Custom accent color for light theme
+    ),
   ).copyWith(
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(

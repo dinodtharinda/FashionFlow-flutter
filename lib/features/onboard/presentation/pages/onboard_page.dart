@@ -1,7 +1,8 @@
 import 'package:fashion_flow/core/common/animations/custom_page_route.dart';
-import 'package:fashion_flow/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:fashion_flow/core/themes/app_pallete.dart';
+import 'package:fashion_flow/features/auth/presentation/pages/auth_option_page.dart';
 import 'package:fashion_flow/features/onboard/data/datasources/local_data_sources.dart';
-import 'package:fashion_flow/features/onboard/presentation/widgets/primay_button.dart';
+import 'package:fashion_flow/core/common/widgets/primay_button.dart';
 import 'package:flutter/material.dart';
 
 class OnboardPage extends StatefulWidget {
@@ -38,12 +39,16 @@ class _OnboardPageState extends State<OnboardPage> {
         curve: Curves.easeIn,
       );
     } else {
-      Navigator.push(context, SignInPage.route());
+      Navigator.pushAndRemoveUntil(
+          context, AuthOptionPage.route(), (_) => false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: PageView.builder(
         controller: _pageController, // Assign the controller here
@@ -53,27 +58,20 @@ class _OnboardPageState extends State<OnboardPage> {
           final isLast =
               index == onboardingList.length - 1; // Check if last page
 
-          return Stack(
+          return Column(
             children: [
               Image.asset(
                 onboarding.imageUrl,
-                height: double.infinity,
+                height: height * 0.7,
+                width: double.infinity,
                 fit: BoxFit.cover,
               ),
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(16),
                 width: double.infinity,
-                height: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromARGB(193, 0, 0, 0),
-                      Color.fromARGB(63, 0, 0, 0),
-                      Colors.transparent,
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
+              
+                decoration: BoxDecoration(
+                 color: Theme.of(context).primaryColor
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -82,8 +80,7 @@ class _OnboardPageState extends State<OnboardPage> {
                       onboarding.title,
                       style: const TextStyle(
                         fontSize: 28,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
                         letterSpacing: 1.2,
                       ),
                       textAlign: TextAlign.center,
@@ -93,8 +90,8 @@ class _OnboardPageState extends State<OnboardPage> {
                       onboarding.description,
                       style: const TextStyle(
                         fontSize: 19,
-                        fontWeight: FontWeight.w300,
-                        color: Color.fromARGB(255, 227, 227, 227),
+                        fontWeight: FontWeight.w400,
+                        color: AppPallete.greyColor,
                         letterSpacing: 1.2,
                       ),
                       maxLines: 2,
@@ -107,7 +104,7 @@ class _OnboardPageState extends State<OnboardPage> {
                           : 'Next', // Change button title
                       onPress: _nextPage, // Call the next page function
                     ),
-                    const SizedBox(height: 50),
+                   
                   ],
                 ),
               ),
