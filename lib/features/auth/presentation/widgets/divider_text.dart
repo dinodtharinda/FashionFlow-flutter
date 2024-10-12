@@ -16,7 +16,7 @@ class DividerText extends StatelessWidget {
           color: AppPallete.greyColor,
         )),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
             text,
             style: const TextStyle(

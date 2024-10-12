@@ -1,5 +1,4 @@
 import 'package:fashion_flow/core/themes/theme.dart';
-import 'package:fashion_flow/features/auth/presentation/pages/auth_option_page.dart';
 import 'package:fashion_flow/features/onboard/presentation/pages/onboard_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: AppTheme.darkThemeMode,
+      theme: AppTheme.lightThemeMode,
       home: const OnboardPage(),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:fashion_flow/core/common/animations/custom_page_route.dart';
 import 'package:fashion_flow/core/common/widgets/primay_button.dart';
+import 'package:fashion_flow/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:fashion_flow/features/auth/presentation/widgets/auth_option_button.dart';
 import 'package:fashion_flow/features/auth/presentation/widgets/divider_text.dart';
 import 'package:flutter/material.dart';
@@ -59,25 +60,31 @@ class AuthOptionPage extends StatelessWidget {
             ),
             PrimaryButton(
               title: 'Sign in with password',
-              onPress: () {},
+              onPress: () {
+                Navigator.push(context, SignInPage.route());
+              },
             ),
             const SizedBox(
               height: 30,
             ),
-            RichText(
-              text: const TextSpan(
-                text: 'Don\'t have an account? ',
-                style: TextStyle(
-                  letterSpacing: 1.2,
-                  fontSize: 17,
+            GestureDetector(
+              onTap: () => Navigator.pushAndRemoveUntil(
+                        context, SignInPage.route(), (route) => false),
+              child: RichText(
+                text: TextSpan(
+                  text: 'Don\'t have an account? ',
+                  style: TextStyle(
+                      letterSpacing: 1.2,
+                      fontSize: 17,
+                      color: Theme.of(context).primaryColorDark),
+                  children: const [
+                    TextSpan(
+                      text: 'Sign up',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, letterSpacing: 1.2),
+                    )
+                  ],
                 ),
-                children: [
-                  TextSpan(
-                    text: 'Sign up',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, letterSpacing: 1.2),
-                  )
-                ],
               ),
             )
           ],

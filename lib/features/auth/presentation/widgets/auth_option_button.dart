@@ -20,6 +20,7 @@ class AuthOptionButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
             border: Border.all(
               width: 1,
               color: Colors.grey,

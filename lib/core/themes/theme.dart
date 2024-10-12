@@ -9,22 +9,31 @@ class AppTheme {
     return OutlineInputBorder(
       borderSide: BorderSide(
         color: color,
-        width: 3,
+        width: 2,
       ),
+      borderRadius: BorderRadius.circular(10),
+    );
+  }
+
+  static OutlineInputBorder _radius([Color color = AppPallete.borderColor]) {
+    return OutlineInputBorder(
+      borderSide: BorderSide.none,
       borderRadius: BorderRadius.circular(10),
     );
   }
 
   // Input decoration theme to maintain consistency across themes.
   static InputDecorationTheme _inputDecorationTheme({
-    required Color focusedColor,
     required Color errorColor,
   }) {
     return InputDecorationTheme(
-      contentPadding: const EdgeInsets.all(27),
-      border: _border(),
-      enabledBorder: _border(),
-      focusedBorder: _border(focusedColor),
+      contentPadding: const EdgeInsets.all(17),
+      border: InputBorder.none,
+      filled: true, // Enables the fill color
+      fillColor: Colors.grey.withOpacity(0.1),
+
+      enabledBorder:_radius(),
+      focusedBorder: _border(),
       errorBorder: _border(errorColor),
     );
   }
@@ -67,11 +76,10 @@ class AppTheme {
     primaryColorLight: AppPallete.backgroundColorDark,
     brightness: Brightness.dark,
     fontFamily: _fontFamily,
-    splashColor: Colors.grey.withOpacity(0.2), // Custom splash color for dark theme
+    splashColor:
+        Colors.grey.withOpacity(0.2), // Custom splash color for dark theme
     colorScheme: const ColorScheme.dark(
-      primary: AppPallete.backgroundColorDark,
-      secondary: Colors.grey
-    ),
+        primary: AppPallete.backgroundColorDark, secondary: Colors.grey),
   ).copyWith(
     scaffoldBackgroundColor: AppPallete.backgroundColorDark,
     appBarTheme: const AppBarTheme(
@@ -86,7 +94,6 @@ class AppTheme {
       ),
     ),
     inputDecorationTheme: _inputDecorationTheme(
-      focusedColor: AppPallete.gradient2,
       errorColor: AppPallete.errorColor,
     ),
     textTheme: _textTheme(Colors.white),
@@ -100,7 +107,8 @@ class AppTheme {
     primaryColorLight: AppPallete.backgroundColor,
     brightness: Brightness.light,
     fontFamily: _fontFamily,
-    splashColor: Colors.grey.withOpacity(0.2), // Custom splash color for light theme
+    splashColor:
+        Colors.grey.withOpacity(0.2), // Custom splash color for light theme
     colorScheme: const ColorScheme.light(
       primary: AppPallete.backgroundColor,
       secondary: Colors.grey, // Custom accent color for light theme
@@ -119,7 +127,6 @@ class AppTheme {
       ),
     ),
     inputDecorationTheme: _inputDecorationTheme(
-      focusedColor: AppPallete.gradient2,
       errorColor: AppPallete.errorColor,
     ),
     textTheme: _textTheme(Colors.black),
