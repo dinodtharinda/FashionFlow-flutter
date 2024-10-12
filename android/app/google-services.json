@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "108574800436",
+    "project_id": "fashion-flow-e32c3",
+    "storage_bucket": "fashion-flow-e32c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108574800436:android:e6f10cee8ae6f90b3aa861",
+        "android_client_info": {
+          "package_name": "com.dinod.fashion.flow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi5g2C2SpiEjR-jAlubw9XEyLY4HjUu2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108574800436:android:43817145b41fd61a3aa861",
+        "android_client_info": {
+          "package_name": "com.example.fashion_flow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi5g2C2SpiEjR-jAlubw9XEyLY4HjUu2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
