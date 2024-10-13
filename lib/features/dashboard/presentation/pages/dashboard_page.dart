@@ -1,5 +1,5 @@
 import 'package:fashion_flow/core/common/animations/custom_page_route.dart';
-import 'package:fashion_flow/features/product/presentation/pages/products_page.dart';
+import 'package:fashion_flow/features/dashboard/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -16,7 +16,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
   int _pageIndex = 0;
 
    final List<Widget> _pages = [
-    const ProductsPage(),
+    const HomePage(),
    const Text("store"),
    const Text("wishlist"),
    const Text("settings"),
