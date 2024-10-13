@@ -8,6 +8,7 @@ import 'package:fashion_flow/features/auth/presentation/pages/sign_up_page.dart'
 import 'package:fashion_flow/features/auth/presentation/widgets/auth_field.dart';
 import 'package:fashion_flow/features/auth/presentation/widgets/auth_option_button.dart';
 import 'package:fashion_flow/features/auth/presentation/widgets/divider_text.dart';
+import 'package:fashion_flow/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,6 +42,9 @@ class _SignInPageState extends State<SignInPage> {
         listener: (context, state) {
           if (state is AuthFailure) {
             showSnackBarMsg(context, state.message);
+          } else if (state is AuthSuccess) {
+            Navigator.pushAndRemoveUntil(
+                context, DashBoardPage.route(), (_) => false);
           }
         },
         builder: (context, state) {
@@ -84,12 +88,12 @@ class _SignInPageState extends State<SignInPage> {
                     title: 'Sign in',
                     onPress: () {
                       if (formKey.currentState!.validate()) {
-                         context.read<AuthBloc>().add(
-                          AuthLogin(
-                            email: _emailController.text.trim(),
-                            password: _passwordController.text.trim(),
-                          ),
-                        );
+                        context.read<AuthBloc>().add(
+                              AuthLogin(
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text.trim(),
+                              ),
+                            );
                       }
                     },
                   ),

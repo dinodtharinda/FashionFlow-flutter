@@ -1,5 +1,5 @@
 import 'package:fashion_flow/core/error/failures.dart';
-import 'package:fashion_flow/features/auth/domain/entities/user.dart';
+import 'package:fashion_flow/core/common/entities/user.dart';
 import 'package:fashion_flow/features/auth/domain/repositories/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 

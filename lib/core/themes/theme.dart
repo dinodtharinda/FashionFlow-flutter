@@ -15,7 +15,7 @@ class AppTheme {
     );
   }
 
-  static OutlineInputBorder _radius([Color color = AppPallete.borderColor]) {
+  static OutlineInputBorder _radius() {
     return OutlineInputBorder(
       borderSide: BorderSide.none,
       borderRadius: BorderRadius.circular(10),
@@ -28,12 +28,11 @@ class AppTheme {
   }) {
     return InputDecorationTheme(
       contentPadding: const EdgeInsets.all(17),
-      border: InputBorder.none,
       filled: true, // Enables the fill color
       fillColor: Colors.grey.withOpacity(0.1),
-
-      enabledBorder:_radius(),
-      focusedBorder: _border(),
+      border: _border(),
+      enabledBorder: _radius(),
+      focusedBorder: _border(const Color.fromARGB(255, 181, 181, 181)),
       errorBorder: _border(errorColor),
     );
   }
@@ -98,7 +97,6 @@ class AppTheme {
     ),
     textTheme: _textTheme(Colors.white),
     chipTheme: _chipTheme(AppPallete.backgroundColor, Colors.white),
-   
   );
 
   // Define the light theme mode using the default light theme.

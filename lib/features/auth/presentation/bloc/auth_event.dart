@@ -22,3 +22,6 @@ final class AuthSignUp extends AuthEvent {
     required this.password,
   });
 }
+
+final class AuthGetCurrentUser extends AuthEvent {}
+final class AuthLogout extends AuthEvent {}

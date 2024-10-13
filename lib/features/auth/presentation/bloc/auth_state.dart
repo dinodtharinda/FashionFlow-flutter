@@ -8,16 +8,14 @@ final class AuthInitial extends AuthState {}
 final class AuthLoding extends AuthState {}
 
 final class AuthSuccess extends AuthState{
-  final User user;
+  final User? user;
 
-  AuthSuccess({required this.user}){
-    print(user.toString());
-  }
+  AuthSuccess( [this.user]);
 }
 
 final class AuthFailure extends AuthState{
   final String message;
 
-  AuthFailure({required this.message});
+  AuthFailure( this.message);
   
 }
