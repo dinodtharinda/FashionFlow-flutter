@@ -82,14 +82,15 @@ class AppTheme {
   ).copyWith(
     scaffoldBackgroundColor: AppPallete.backgroundColorDark,
     appBarTheme: const AppBarTheme(
+      centerTitle: true,
       backgroundColor: AppPallete.backgroundColorDark,
       elevation: 0,
       iconTheme: IconThemeData(color: Colors.white),
       titleTextStyle: TextStyle(
         fontFamily: _fontFamily,
-        fontSize: 23,
+        fontSize: 20,
         color: Colors.white,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
       ),
     ),
     inputDecorationTheme: _inputDecorationTheme(
@@ -115,14 +116,15 @@ class AppTheme {
   ).copyWith(
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
+      centerTitle: true,
       backgroundColor: AppPallete.backgroundColor,
       elevation: 0,
       iconTheme: IconThemeData(color: Colors.black),
       titleTextStyle: TextStyle(
         fontFamily: _fontFamily,
-        fontSize: 23,
+        fontSize: 20,
         color: Colors.black,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
       ),
     ),
     inputDecorationTheme: _inputDecorationTheme(
