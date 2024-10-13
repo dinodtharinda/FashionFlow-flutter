@@ -35,7 +35,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
           });
         },
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'home'),
+          NavigationDestination(icon: Icon(Icons.home_outlined), label: 'home'),
           NavigationDestination(
               icon: Icon(Icons.storefront_sharp), label: 'Store'),
           NavigationDestination(
