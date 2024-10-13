@@ -1,3 +1,5 @@
+import 'package:fashion_flow/core/api/firebase/firebase_messaging_api.dart';
+import 'package:fashion_flow/core/api/firebase/firestore_api.dart';
 import 'package:fashion_flow/core/error/exception.dart';
 import 'package:fashion_flow/features/auth/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +10,7 @@ abstract interface class AuthRemoteDateSource {
   Future<UserModel> signUpWithPassword(
       {required String email, required String password});
 
-  UserModel getCurrentUser();
+  Future<UserModel> getCurrentUser();
 
   Future<void> logout();
 }
@@ -16,19 +18,22 @@ abstract interface class AuthRemoteDateSource {
 class AuthRemoteDateSourceImpl implements AuthRemoteDateSource {
   final firebaseAuth = FirebaseAuth.instance;
   @override
-  UserModel getCurrentUser()  {
+  Future<UserModel> getCurrentUser() async {
     try {
-      final user = firebaseAuth.currentUser;
+      final res = firebaseAuth.currentUser;
 
-      if (user == null) {
+      if (res == null) {
         throw ServerException('User is null!');
       }
 
-      return UserModel(
-        id: user.uid,
-        name: user.displayName ?? '',
-        email: user.email!,
+      final user = UserModel(
+        id: res.uid,
+        name: res.displayName ?? '',
+        email: res.email!,
+        token:  '',
       );
+      
+      return user;
     } on ServerException catch (e) {
       throw ServerException(e.message);
     } on FirebaseAuthException catch (e) {
@@ -40,6 +45,7 @@ class AuthRemoteDateSourceImpl implements AuthRemoteDateSource {
 
   @override
   Future<void> logout() async {
+    await FirebaseMessagingAPI().disposeNotifications();
     await firebaseAuth.signOut();
   }
 
@@ -48,17 +54,23 @@ class AuthRemoteDateSourceImpl implements AuthRemoteDateSource {
       {required String email, required String password}) async {
     try {
       final res = await firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-      final user = res.user;
-      if (user == null) {
+        email: email,
+        password: password,
+      );
+
+      if (res.user == null) {
         throw ServerException('User is null!');
       }
 
-      return UserModel(
-        id: user.uid,
-        name: user.displayName ?? '',
-        email: user.email!,
-      );
+      final token = await FirebaseMessagingAPI().initNotifications();
+      final user = UserModel(
+          id: res.user!.uid,
+          name: res.user!.displayName ?? '',
+          email: res.user!.email!,
+          token: token);
+      await FirebaseFirestoreAPI().saveUser(user.id, user);
+
+      return user;
     } on ServerException catch (e) {
       throw ServerException(e.message);
     } on FirebaseAuthException catch (e) {
@@ -74,16 +86,20 @@ class AuthRemoteDateSourceImpl implements AuthRemoteDateSource {
     try {
       final res = await firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      final user = res.user;
-      if (user == null) {
+
+      if (res.user == null) {
         throw ServerException('User is null!');
       }
 
-      return UserModel(
-        id: user.uid,
-        name: user.displayName ?? '',
-        email: user.email!,
-      );
+      final token = await FirebaseMessagingAPI().initNotifications();
+      final user = UserModel(
+          id: res.user!.uid,
+          name: res.user!.displayName ?? '',
+          email: res.user!.email!,
+          token: token);
+      await FirebaseFirestoreAPI().saveUser(user.id, user);
+
+      return user;
     } on ServerException catch (e) {
       throw ServerException(e.message);
     } on FirebaseAuthException catch (e) {

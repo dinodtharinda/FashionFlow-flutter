@@ -2,7 +2,6 @@ import 'package:fashion_flow/core/error/exception.dart';
 import 'package:fashion_flow/core/error/failures.dart';
 import 'package:fashion_flow/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:fashion_flow/core/common/entities/user.dart';
-import 'package:fashion_flow/features/auth/data/models/user_model.dart';
 import 'package:fashion_flow/features/auth/domain/repositories/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -12,9 +11,9 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.remoteDateSource);
 
   @override
-  Either<Failure, User> getCurrentUser() {
+  Future<Either<Failure, User>> getCurrentUser() async {
     try {
-      return right(remoteDateSource.getCurrentUser());
+      return right(await remoteDateSource.getCurrentUser());
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

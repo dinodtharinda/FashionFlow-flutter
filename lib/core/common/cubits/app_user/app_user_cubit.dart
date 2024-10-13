@@ -11,7 +11,7 @@ class AppUserCubit extends Cubit<AppUserState> {
     if (user == null) {
       emit(AppUserInitial());
     } else {
-      print(user.email);
+      print(user.token);
       emit(AppUserLoggedIn(user));
     }
   }
