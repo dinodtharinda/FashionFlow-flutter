@@ -15,6 +15,11 @@ import 'package:fashion_flow/features/category/data/repositories/category_reposi
 import 'package:fashion_flow/features/category/domain/repositories/category_repository.dart';
 import 'package:fashion_flow/features/category/domain/usecases/get_all_categories.dart';
 import 'package:fashion_flow/features/category/presentation/bloc/category_bloc.dart';
+import 'package:fashion_flow/features/product/data/datasources/product_remote_data_source.dart';
+import 'package:fashion_flow/features/product/data/repositories/product_repository_impl.dart';
+import 'package:fashion_flow/features/product/domain/repositories/product_repository.dart';
+import 'package:fashion_flow/features/product/domain/usecases/get_all_products.dart';
+import 'package:fashion_flow/features/product/presentation/bloc/product_bloc.dart';
 import 'package:fashion_flow/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
@@ -25,10 +30,11 @@ final serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   _initAuth();
   _initCategory();
+  _initProduct();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+
   FirebaseFirestoreAPI().initFirestore();
   SharedPreferences sp = await SharedPreferences.getInstance();
 
@@ -36,6 +42,30 @@ Future<void> initDependencies() async {
   serviceLocator.registerLazySingleton(() => AppUserCubit());
   serviceLocator
       .registerLazySingleton(() => HttpService(AppConstants.BASE_URL, sp));
+}
+
+void _initProduct() {
+  serviceLocator
+    ..registerFactory<ProductRemoteDataSource>(
+      () => ProductRemoteDataSourceImpl(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory<ProductRepository>(
+      () => ProductRepositoryImpl(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetAllProducts(
+        serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => ProductBloc(
+        getAllProducts: serviceLocator(),
+      ),
+    );
 }
 
 void _initCategory() {
