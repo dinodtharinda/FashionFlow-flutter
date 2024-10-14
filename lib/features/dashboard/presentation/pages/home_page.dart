@@ -1,6 +1,5 @@
 import 'package:fashion_flow/core/common/widgets/primay_button.dart';
 import 'package:fashion_flow/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:fashion_flow/features/auth/presentation/pages/auth_option_page.dart';
 import 'package:fashion_flow/features/category/presentation/widgets/category_list_widget.dart';
 import 'package:fashion_flow/features/product/presentation/widgets/product_grid_widget.dart';
 import 'package:fashion_flow/features/product/presentation/widgets/search_field.dart';
