@@ -27,7 +27,8 @@ class _ProductGridWidgetState extends State<ProductGridWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<DisplayProductsCubit, DisplayProductsState>(
       builder: (context, state) {
-        if (state is DisplayProductsLoading) {
+        if (state is DisplayProductsLoading ||
+            state is DisplayProductsFailure) {
           return _buildShimmerEffect();
         } else if (state is DisplayProductsSuccess) {
           return GridView.builder(
