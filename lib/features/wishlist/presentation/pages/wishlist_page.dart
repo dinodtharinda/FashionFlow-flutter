@@ -21,6 +21,14 @@ class _WishlistPageState extends State<WishlistPage> {
     super.initState();
   }
 
+  SliverGridDelegate gridDelegate =
+      const SliverGridDelegateWithFixedCrossAxisCount(
+    childAspectRatio: 2 / 3.5,
+    crossAxisSpacing: 15,
+    crossAxisCount: 2,
+    mainAxisSpacing: 15,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +46,7 @@ class _WishlistPageState extends State<WishlistPage> {
               return const Loader();
             } else if (state is DisplayWishlistSuccess) {
               return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 2 / 3.5,
-                  crossAxisSpacing: 15,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 15,
-                ),
+                gridDelegate: gridDelegate,
                 padding: EdgeInsets.zero,
                 primary: false,
                 shrinkWrap: true,
