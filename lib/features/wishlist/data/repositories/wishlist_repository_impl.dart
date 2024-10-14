@@ -30,7 +30,7 @@ class WishlistRepositoyImpl  implements WishlistRepository{
   }
 
   @override
-  Future<Either<Failure, bool>> toggleToWishlist(Product product) async {
+  Future<Either<Failure, List<WishlistItem>>> toggleToWishlist(Product product) async {
     try {
       return right(await wishListLocalDataSource.addToWishlist(product));
     } on ServerException catch (e) {

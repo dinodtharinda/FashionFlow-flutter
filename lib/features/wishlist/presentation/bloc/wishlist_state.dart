@@ -19,12 +19,12 @@ final class WishlistDisplaySuccess extends WishlistState {
   WishlistDisplaySuccess(this.wishlist);
 }
 
-final class WishlistToggleSuccess extends WishlistState {}
+final class WishlistToggleSuccess extends WishlistDisplaySuccess {
+  WishlistToggleSuccess(super.wishlist);
+}
 
 final class WishlistIsItemSuccess extends WishlistState {
   final bool isWishItem;
 
   WishlistIsItemSuccess(this.isWishItem);
-  
 }
-

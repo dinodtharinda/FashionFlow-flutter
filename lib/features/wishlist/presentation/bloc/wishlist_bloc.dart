@@ -50,7 +50,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
 
     res.fold(
       (l) => emit(WishlistFailure(l.message)),
-      (r) => emit(WishlistToggleSuccess()),
+      (r) => emit(WishlistToggleSuccess(r)),
     );
   }
 
