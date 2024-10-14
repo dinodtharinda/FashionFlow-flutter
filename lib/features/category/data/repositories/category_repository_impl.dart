@@ -1,7 +1,7 @@
 import 'package:fashion_flow/core/error/exception.dart';
 import 'package:fashion_flow/core/error/failures.dart';
 import 'package:fashion_flow/features/category/data/datasource/category_remote_data_source.dart';
-import 'package:fashion_flow/features/category/domain/entities/category.dart';
+import 'package:fashion_flow/core/common/entities/category.dart';
 import 'package:fashion_flow/features/category/domain/repositories/category_repository.dart';
 import 'package:fpdart/fpdart.dart';
 

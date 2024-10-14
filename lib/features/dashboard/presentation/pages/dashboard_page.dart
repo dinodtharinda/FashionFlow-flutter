@@ -1,6 +1,6 @@
 import 'package:fashion_flow/core/common/animations/custom_page_route.dart';
 import 'package:fashion_flow/features/dashboard/presentation/pages/home_page.dart';
-import 'package:fashion_flow/features/wishlist/presentation/pages/wishlist_page.dart';
+import 'package:fashion_flow/features/dashboard/presentation/pages/wishlist_page.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardPage extends StatefulWidget {

@@ -1,6 +1,9 @@
 import 'package:fashion_flow/core/api/firebase/firestore_api.dart';
 import 'package:fashion_flow/core/api/http/http_service.dart';
 import 'package:fashion_flow/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:fashion_flow/core/common/cubits/display_categories/display_categories_cubit.dart';
+import 'package:fashion_flow/core/common/cubits/display_products/display_products_cubit.dart';
+import 'package:fashion_flow/core/common/cubits/display_wishlist/display_wishlist_cubit.dart';
 import 'package:fashion_flow/core/constants/constants.dart';
 import 'package:fashion_flow/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:fashion_flow/features/auth/data/repositories/auth_repository_impl.dart';
@@ -48,6 +51,10 @@ Future<void> initDependencies() async {
 
   //core
   serviceLocator.registerLazySingleton(() => AppUserCubit());
+  serviceLocator.registerLazySingleton(() => DisplayCatogoriesCubit());
+  serviceLocator.registerLazySingleton(() => DisplayProductsCubit());
+  serviceLocator.registerLazySingleton(() => DisplayWishlistCubit());
+
   serviceLocator
       .registerLazySingleton(() => HttpService(AppConstants.BASE_URL, sp));
 }
@@ -79,10 +86,10 @@ void _initWishlist() {
     )
     ..registerLazySingleton(
       () => WishlistBloc(
-        getWishlist: serviceLocator(),
-        toggleWishItem: serviceLocator(),
-        isWishItem: serviceLocator(),
-      ),
+          getWishlist: serviceLocator(),
+          toggleWishItem: serviceLocator(),
+          isWishItem: serviceLocator(),
+          displayWishlistCubit: serviceLocator()),
     );
 }
 
@@ -106,6 +113,7 @@ void _initProduct() {
     ..registerLazySingleton(
       () => ProductBloc(
         getAllProducts: serviceLocator(),
+        displayProductsCubit: serviceLocator(),
       ),
     );
 }
@@ -130,6 +138,7 @@ void _initCategory() {
     ..registerLazySingleton(
       () => CategoryBloc(
         getAllCategories: serviceLocator(),
+        displayCatogoriesCubit: serviceLocator(),
       ),
     );
 }

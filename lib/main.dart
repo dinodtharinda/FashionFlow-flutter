@@ -1,4 +1,7 @@
 import 'package:fashion_flow/core/common/cubits/app_user/app_user_cubit.dart';
+import 'package:fashion_flow/core/common/cubits/display_categories/display_categories_cubit.dart';
+import 'package:fashion_flow/core/common/cubits/display_products/display_products_cubit.dart';
+import 'package:fashion_flow/core/common/cubits/display_wishlist/display_wishlist_cubit.dart';
 import 'package:fashion_flow/core/themes/theme.dart';
 import 'package:fashion_flow/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fashion_flow/features/auth/presentation/pages/auth_option_page.dart';
@@ -20,8 +23,12 @@ void main() async {
         BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
         BlocProvider(create: (_) => serviceLocator<CategoryBloc>()),
+        BlocProvider(create: (_) => serviceLocator<DisplayCatogoriesCubit>()),
         BlocProvider(create: (_) => serviceLocator<ProductBloc>()),
+        BlocProvider(create: (_) => serviceLocator<DisplayProductsCubit>()),
         BlocProvider(create: (_) => serviceLocator<WishlistBloc>()),
+        BlocProvider(create: (_) => serviceLocator<DisplayWishlistCubit>()),
+
       ],
       child: const MainApp(),
     ),

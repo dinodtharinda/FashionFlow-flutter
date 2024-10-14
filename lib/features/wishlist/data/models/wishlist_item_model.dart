@@ -1,4 +1,4 @@
-import 'package:fashion_flow/features/wishlist/domain/entites/wishlist_item.dart';
+import 'package:fashion_flow/core/common/entities/wishlist_item.dart';
 
 class WishlistItemModel extends WishlistItem {
   WishlistItemModel({

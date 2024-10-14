@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:fashion_flow/core/common/cubits/display_wishlist/display_wishlist_cubit.dart';
 import 'package:fashion_flow/core/common/entities/product.dart';
 import 'package:fashion_flow/core/usecase/usecase.dart';
-import 'package:fashion_flow/features/wishlist/domain/entites/wishlist_item.dart';
+import 'package:fashion_flow/core/common/entities/wishlist_item.dart';
 import 'package:fashion_flow/features/wishlist/domain/usecases/get_wishlist.dart';
 import 'package:fashion_flow/features/wishlist/domain/usecases/is_wish_item.dart';
 import 'package:fashion_flow/features/wishlist/domain/usecases/toggle_wish_item.dart';
@@ -16,13 +17,16 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   final GetWishlist _getWishlist;
   final ToggleWishItem _toggleWishItem;
   final IsWishItem _isWishItem;
-  WishlistBloc(
-      {required GetWishlist getWishlist,
-      required ToggleWishItem toggleWishItem,
-      required IsWishItem isWishItem})
-      : _toggleWishItem = toggleWishItem,
+  final DisplayWishlistCubit _displayWishlistCubit;
+  WishlistBloc({
+    required GetWishlist getWishlist,
+    required ToggleWishItem toggleWishItem,
+    required IsWishItem isWishItem,
+    required DisplayWishlistCubit displayWishlistCubit,
+  })  : _toggleWishItem = toggleWishItem,
         _getWishlist = getWishlist,
         _isWishItem = isWishItem,
+        _displayWishlistCubit = displayWishlistCubit,
         super(WishlistInitial()) {
     on<WishlistEvent>((event, emit) => emit(WishlistLoading()));
     on<WishlistFetchAll>(_onFetchWishlist);
@@ -38,7 +42,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
 
     res.fold(
       (l) => emit(WishlistFailure(l.message)),
-      (r) => emit(WishlistDisplaySuccess(r)),
+      (r) => _emitSuccess(emit, r),
     );
   }
 
@@ -50,7 +54,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
 
     res.fold(
       (l) => emit(WishlistFailure(l.message)),
-      (r) => emit(WishlistToggleSuccess(r)),
+      (r) => _emitSuccess(emit, r),
     );
   }
 
@@ -62,5 +66,10 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
       (l) => emit(WishlistFailure(l.message)),
       (r) => emit(WishlistIsItemSuccess(r)),
     );
+  }
+
+  void _emitSuccess(Emitter<WishlistState> emit, List<WishlistItem> wishlist) {
+    _displayWishlistCubit.display(wishlist);
+    emit(WishlistToggleSuccess(wishlist));
   }
 }

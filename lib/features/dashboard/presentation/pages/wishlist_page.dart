@@ -1,7 +1,9 @@
+import 'package:fashion_flow/core/common/cubits/display_wishlist/display_wishlist_cubit.dart';
 import 'package:fashion_flow/core/common/widgets/loader.dart';
 import 'package:fashion_flow/core/common/widgets/product_grid_tile.dart';
 import 'package:fashion_flow/core/utils/show_snackbar_message.dart';
 import 'package:fashion_flow/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,16 +27,16 @@ class _WishlistPageState extends State<WishlistPage> {
       appBar: AppBar(title: const Text('Wishlist')),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: BlocConsumer<WishlistBloc, WishlistState>(
+        child: BlocConsumer<DisplayWishlistCubit, DisplayWishlistState>(
           listener: (context, state) {
-            if (state is WishlistFailure) {
-              showSnackBarMsg(context, state.message);
-            }
+            // if (state is DisplayWishlistFailure) {
+            //   showSnackBarMsg(context, state.message);
+            // }
           },
           builder: (context, state) {
             if (state is WishlistLoading) {
               return const Loader();
-            } else if (state is WishlistDisplaySuccess) {
+            } else if (state is DisplayWishlistSuccess) {
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 2 / 3.5,
