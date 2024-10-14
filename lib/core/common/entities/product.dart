@@ -1,6 +1,7 @@
-import 'package:fashion_flow/features/product/domain/entities/dimensions.dart';
-import 'package:fashion_flow/features/product/domain/entities/meta.dart';
-import 'package:fashion_flow/features/product/domain/entities/review.dart';
+import 'package:fashion_flow/core/common/entities/dimensions.dart';
+import 'package:fashion_flow/core/common/entities/meta.dart';
+import 'package:fashion_flow/core/common/entities/review.dart';
+
 
 class Product {
   final int id;

@@ -1,4 +1,4 @@
-import 'package:fashion_flow/features/product/domain/entities/meta.dart';
+import 'package:fashion_flow/core/common/entities/meta.dart';
 
 class MetaModel extends Meta {
   MetaModel({

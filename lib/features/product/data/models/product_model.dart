@@ -1,7 +1,7 @@
+import 'package:fashion_flow/core/common/entities/product.dart';
 import 'package:fashion_flow/features/product/data/models/dimension_model.dart';
 import 'package:fashion_flow/features/product/data/models/meta_model.dart';
 import 'package:fashion_flow/features/product/data/models/review_model.dart';
-import 'package:fashion_flow/features/product/domain/entities/product.dart';
 
 class ProductModel extends Product {
   ProductModel({

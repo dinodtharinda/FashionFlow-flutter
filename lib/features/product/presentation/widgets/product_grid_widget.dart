@@ -1,4 +1,4 @@
-import 'package:fashion_flow/features/product/domain/entities/product.dart';
+import 'package:fashion_flow/core/common/entities/product.dart';
 import 'package:fashion_flow/features/product/presentation/bloc/product_bloc.dart';
 import 'package:fashion_flow/features/product/presentation/widgets/network_image.dart';
 import 'package:flutter/material.dart';

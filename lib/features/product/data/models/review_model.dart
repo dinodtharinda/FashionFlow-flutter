@@ -1,4 +1,5 @@
-import 'package:fashion_flow/features/product/domain/entities/review.dart';
+import 'package:fashion_flow/core/common/entities/review.dart';
+
 
 class ReviewModel extends Review {
   ReviewModel({

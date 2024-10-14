@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:fashion_flow/core/common/entities/product.dart';
 import 'package:fashion_flow/core/usecase/usecase.dart';
-import 'package:fashion_flow/features/product/domain/entities/product.dart';
 import 'package:fashion_flow/features/product/domain/usecases/get_all_products.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

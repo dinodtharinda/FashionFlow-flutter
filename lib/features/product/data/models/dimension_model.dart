@@ -1,4 +1,4 @@
-import 'package:fashion_flow/features/product/domain/entities/dimensions.dart';
+import 'package:fashion_flow/core/common/entities/dimensions.dart';
 
 class DimensionModel extends Dimensions {
   DimensionModel({

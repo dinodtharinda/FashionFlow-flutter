@@ -1,5 +1,5 @@
+import 'package:fashion_flow/core/common/entities/product.dart';
 import 'package:fashion_flow/core/error/failures.dart';
-import 'package:fashion_flow/features/product/domain/entities/product.dart';
 import 'package:fpdart/fpdart.dart';
 
 abstract interface class ProductRepository {
