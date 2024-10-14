@@ -1,6 +1,7 @@
 import 'package:fashion_flow/core/common/entities/product.dart';
 import 'package:fashion_flow/features/product/presentation/bloc/product_bloc.dart';
 import 'package:fashion_flow/features/product/presentation/widgets/network_image.dart';
+import 'package:fashion_flow/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -15,12 +16,6 @@ class ProductGridWidget extends StatefulWidget {
 }
 
 class _ProductGridWidgetState extends State<ProductGridWidget> {
-  @override
-  void initState() {
-    context.read<ProductBloc>().add(ProductFetchAll());
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductBloc, ProductState>(
@@ -104,7 +99,7 @@ class _ProductGridWidgetState extends State<ProductGridWidget> {
   }
 }
 
-class ProductGridTile extends StatelessWidget {
+class ProductGridTile extends StatefulWidget {
   const ProductGridTile({
     super.key,
     required this.product,
@@ -113,89 +108,115 @@ class ProductGridTile extends StatelessWidget {
   final Product product;
 
   @override
+  State<ProductGridTile> createState() => _ProductGridTileState();
+}
+
+class _ProductGridTileState extends State<ProductGridTile> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: Container(
-              color: Theme.of(context).primaryColorDark.withOpacity(0.05),
-              child: CustomNetworkImage(
-                imageUrl: product.images.first,
+        Column(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Container(
+                  color: Theme.of(context).primaryColorDark.withOpacity(0.05),
+                  child: CustomNetworkImage(
+                    imageUrl: widget.product.images.first,
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        const SizedBox(height: 5),
-        Row(
-          children: [
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.title,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Icon(
-                        Icons.star,
-                        size: 15,
-                      ),
-                      const SizedBox(width: 3),
                       Text(
-                        product.rating.toString(),
+                        widget.product.title,
                         style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
                         ),
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(width: 5),
-                      const Text('|'),
-                      const SizedBox(width: 5),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .primaryColorDark
-                              .withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          'Stock ${product.stock}',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.star,
+                            size: 15,
                           ),
+                          const SizedBox(width: 3),
+                          Text(
+                            widget.product.rating.toString(),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          const Text('|'),
+                          const SizedBox(width: 5),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 5,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .primaryColorDark
+                                  .withOpacity(0.05),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Text(
+                              'Stock ${widget.product.stock}',
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "\$${widget.product.price}",
+                        style: const TextStyle(
+                          fontSize: 15,
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
-                  Text(
-                    "\$${product.price}",
-                    style: const TextStyle(
-                      fontSize: 15,
-                      letterSpacing: 1.2,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
+        Positioned(
+          top: 5,
+          right: 5,
+          child: IconButton(
+            onPressed: () {
+              context.read<WishlistBloc>().add(
+                    WishlistToggle(product: widget.product),
+                  );
+            },
+            icon: const Icon(Icons.favorite_outline),
+          ),
+        )
       ],
     );
   }

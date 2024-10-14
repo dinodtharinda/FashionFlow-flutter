@@ -20,6 +20,13 @@ import 'package:fashion_flow/features/product/data/repositories/product_reposito
 import 'package:fashion_flow/features/product/domain/repositories/product_repository.dart';
 import 'package:fashion_flow/features/product/domain/usecases/get_all_products.dart';
 import 'package:fashion_flow/features/product/presentation/bloc/product_bloc.dart';
+import 'package:fashion_flow/features/wishlist/data/datasources/wishlish_local_data_source.dart';
+import 'package:fashion_flow/features/wishlist/data/repositories/wishlist_repository_impl.dart';
+import 'package:fashion_flow/features/wishlist/domain/repositories/wishlist_repository.dart';
+import 'package:fashion_flow/features/wishlist/domain/usecases/get_wishlist.dart';
+import 'package:fashion_flow/features/wishlist/domain/usecases/is_wish_item.dart';
+import 'package:fashion_flow/features/wishlist/domain/usecases/toggle_wish_item.dart';
+import 'package:fashion_flow/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:fashion_flow/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
@@ -31,6 +38,7 @@ Future<void> initDependencies() async {
   _initAuth();
   _initCategory();
   _initProduct();
+  _initWishlist();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -42,6 +50,40 @@ Future<void> initDependencies() async {
   serviceLocator.registerLazySingleton(() => AppUserCubit());
   serviceLocator
       .registerLazySingleton(() => HttpService(AppConstants.BASE_URL, sp));
+}
+
+void _initWishlist() {
+  serviceLocator
+    ..registerLazySingleton<WishListLocalDataSource>(
+      () => WIshListLocalDataSourceImpl(),
+    )
+    ..registerFactory<WishlistRepository>(
+      () => WishlistRepositoyImpl(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetWishlist(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => ToggleWishItem(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => IsWishItem(
+        serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => WishlistBloc(
+        getWishlist: serviceLocator(),
+        toggleWishItem: serviceLocator(),
+        isWishItem: serviceLocator(),
+      ),
+    );
 }
 
 void _initProduct() {

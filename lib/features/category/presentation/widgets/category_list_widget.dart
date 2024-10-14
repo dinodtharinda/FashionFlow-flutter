@@ -14,12 +14,6 @@ class CategoryListWidget extends StatefulWidget {
 
 class _CategoryListWidgetState extends State<CategoryListWidget> {
   @override
-  void initState() {
-    context.read<CategoryBloc>().add(CategoryFetchAll());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),

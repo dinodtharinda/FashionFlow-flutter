@@ -5,6 +5,7 @@ import 'package:fashion_flow/features/auth/presentation/pages/auth_option_page.d
 import 'package:fashion_flow/features/category/presentation/bloc/category_bloc.dart';
 import 'package:fashion_flow/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:fashion_flow/features/product/presentation/bloc/product_bloc.dart';
+import 'package:fashion_flow/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:fashion_flow/init_dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +21,7 @@ void main() async {
         BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
         BlocProvider(create: (_) => serviceLocator<CategoryBloc>()),
         BlocProvider(create: (_) => serviceLocator<ProductBloc>()),
+        BlocProvider(create: (_) => serviceLocator<WishlistBloc>()),
       ],
       child: const MainApp(),
     ),
@@ -38,6 +40,8 @@ class _MainAppState extends State<MainApp> {
   void initState() {
     super.initState();
     context.read<AuthBloc>().add(AuthGetCurrentUser());
+    context.read<CategoryBloc>().add(CategoryFetchAll());
+    context.read<ProductBloc>().add(ProductFetchAll());
   }
 
   @override

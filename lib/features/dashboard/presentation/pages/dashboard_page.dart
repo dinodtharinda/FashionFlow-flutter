@@ -1,5 +1,6 @@
 import 'package:fashion_flow/core/common/animations/custom_page_route.dart';
 import 'package:fashion_flow/features/dashboard/presentation/pages/home_page.dart';
+import 'package:fashion_flow/features/wishlist/presentation/pages/wishlist_page.dart';
 import 'package:flutter/material.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -15,12 +16,11 @@ class DashBoardPage extends StatefulWidget {
 class _DashBoardPageState extends State<DashBoardPage> {
   int _pageIndex = 0;
 
-   final List<Widget> _pages = [
+  final List<Widget> _pages = [
     const HomePage(),
-   const Text("store"),
-   const Text("wishlist"),
-   const Text("settings"),
-
+    const Text("store"),
+    const WishlistPage(),
+    const Text("settings"),
   ];
   @override
   Widget build(BuildContext context) {
@@ -46,6 +46,5 @@ class _DashBoardPageState extends State<DashBoardPage> {
       ),
       body: Center(child: _pages[_pageIndex]),
     );
-    
   }
 }
