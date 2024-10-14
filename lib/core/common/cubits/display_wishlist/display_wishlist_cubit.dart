@@ -8,11 +8,15 @@ part 'display_wishlist_state.dart';
 class DisplayWishlistCubit extends Cubit<DisplayWishlistState> {
   DisplayWishlistCubit() : super(DisplayWishlistLoading());
 
-  void display(List<WishlistItem>? wishlist) {
+  void success(List<WishlistItem>? wishlist) {
     if (wishlist != null) {
       emit(DisplayWishlistSuccess(wishlist));
     } else {
-      emit(DisplayWishlistFailure());
+      emit(DisplayWishlistFailure('wishlist is null'));
     }
+  }
+
+   void failure(String error) {
+    emit(DisplayWishlistFailure(error));
   }
 }

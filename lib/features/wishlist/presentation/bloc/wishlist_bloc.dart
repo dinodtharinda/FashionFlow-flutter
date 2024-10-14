@@ -41,7 +41,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
     final res = await _getWishlist(NoParams());
 
     res.fold(
-      (l) => emit(WishlistFailure(l.message)),
+      (l) => _emitFailure(emit, l.message),
       (r) => _emitSuccess(emit, r),
     );
   }
@@ -53,7 +53,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
     final res = await _toggleWishItem(ToggleWishParams(product: event.product));
 
     res.fold(
-      (l) => emit(WishlistFailure(l.message)),
+      (l) => _emitFailure(emit, l.message),
       (r) => _emitSuccess(emit, r),
     );
   }
@@ -69,7 +69,12 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   }
 
   void _emitSuccess(Emitter<WishlistState> emit, List<WishlistItem> wishlist) {
-    _displayWishlistCubit.display(wishlist);
+    _displayWishlistCubit.success(wishlist);
     emit(WishlistToggleSuccess(wishlist));
+  }
+
+  void _emitFailure(Emitter<WishlistState> emit, String error) {
+    _displayWishlistCubit.failure(error);
+    emit(WishlistFailure(error));
   }
 }

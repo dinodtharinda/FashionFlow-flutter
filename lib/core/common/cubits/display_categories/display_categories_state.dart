@@ -13,4 +13,8 @@ final class DisplayCategoriesSuccess extends DisplayCategoriesState {
   DisplayCategoriesSuccess(this.categories);
 }
 
-final class DisplayCategoriesFailure extends DisplayCategoriesState {}
+final class DisplayCategoriesFailure extends DisplayCategoriesState {
+  final String message;
+
+  DisplayCategoriesFailure(this.message);
+}

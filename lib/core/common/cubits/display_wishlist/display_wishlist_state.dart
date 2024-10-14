@@ -13,4 +13,8 @@ final class DisplayWishlistSuccess extends DisplayWishlistState {
   DisplayWishlistSuccess(this.wishlist);
 }
 
-final class DisplayWishlistFailure extends DisplayWishlistState {}
+final class DisplayWishlistFailure extends DisplayWishlistState {
+  final String message;
+
+  DisplayWishlistFailure(this.message);
+}

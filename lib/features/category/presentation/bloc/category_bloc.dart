@@ -29,13 +29,18 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     final res = await _getAllCategories(NoParams());
 
     res.fold(
-      (l) => emit(CategoryFailure(l.message)),
+      (l) => _emitFailure(emit, l.message),
       (r) => _emitSuccess(emit, r),
     );
   }
 
   void _emitSuccess(Emitter<CategoryState> emit, List<Category> categories) {
-    _displayCatogoriesCubit.displayCategories(categories);
+    _displayCatogoriesCubit.success(categories);
     emit(CategorySuccess(categories));
+  }
+
+  void _emitFailure(Emitter<CategoryState> emit, String error) {
+    _displayCatogoriesCubit.failure(error);
+    emit(CategoryFailure(error));
   }
 }

@@ -13,4 +13,9 @@ final class DisplayProductsSuccess extends DisplayProductsState {
   DisplayProductsSuccess(this.products);
 }
 
-final class DisplayProductsFailure extends DisplayProductsState {}
+final class DisplayProductsFailure extends DisplayProductsState {
+  final String message;
+
+  DisplayProductsFailure(this.message);
+  
+}

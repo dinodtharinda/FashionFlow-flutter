@@ -7,11 +7,15 @@ part 'display_categories_state.dart';
 class DisplayCatogoriesCubit extends Cubit<DisplayCategoriesState> {
   DisplayCatogoriesCubit() : super(DisplayCategoriesLoading());
 
-  void displayCategories(List<Category>? categories) {
+  void success(List<Category>? categories) {
     if (categories != null) {
       emit(DisplayCategoriesSuccess(categories));
     } else {
-      emit(DisplayCategoriesFailure());
+      emit(DisplayCategoriesFailure('category is null'));
     }
+  }
+
+  void failure(String error) {
+    emit(DisplayCategoriesFailure(error));
   }
 }

@@ -28,13 +28,18 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     final res = await _getAllProducts(NoParams());
 
     res.fold(
-      (l) => emit(ProductFailure(l.message)),
+      (l) => _emitFailure(emit, l.message),
       (r) => _emitSuccess(emit, r),
     );
   }
 
   void _emitSuccess(Emitter<ProductState> emit, List<Product> prodcuts) {
-    _displayProductsCubit.display(prodcuts);
+    _displayProductsCubit.success(prodcuts);
     emit(ProductSuccess(prodcuts));
+  }
+
+  void _emitFailure(Emitter<ProductState> emit, String error) {
+    _displayProductsCubit.failure(error);
+    emit(ProductFailure(error));
   }
 }

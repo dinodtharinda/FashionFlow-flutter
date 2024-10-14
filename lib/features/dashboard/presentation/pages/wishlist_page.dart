@@ -29,9 +29,9 @@ class _WishlistPageState extends State<WishlistPage> {
         padding: const EdgeInsets.all(16),
         child: BlocConsumer<DisplayWishlistCubit, DisplayWishlistState>(
           listener: (context, state) {
-            // if (state is DisplayWishlistFailure) {
-            //   showSnackBarMsg(context, state.message);
-            // }
+            if (state is DisplayWishlistFailure) {
+              showSnackBarMsg(context, state.message);
+            }
           },
           builder: (context, state) {
             if (state is WishlistLoading) {
