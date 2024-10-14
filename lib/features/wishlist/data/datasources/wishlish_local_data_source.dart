@@ -6,7 +6,7 @@ import '/features/wishlist/data/models/wishlist_item_model.dart';
 
 abstract interface class WishListLocalDataSource {
   List<WishlistItemModel> get wishlist;
-  Future<List<WishlistItemModel>> addToWishlist(Product product);
+  Future<bool> addToWishlist(Product product);
   Future<bool> isWishItem(int id);
 }
 
@@ -23,11 +23,12 @@ class WIshListLocalDataSourceImpl
   }
 
   @override
- Future<List<WishlistItemModel>> addToWishlist(Product product) async {
+  Future<bool> addToWishlist(Product product) async {
     try {
       final isContain = hasProductInWishlist(product.id);
       if (isContain) {
         _removeProductFromWishlist(product.id);
+        return false;
       } else {
         final newWishlistItem = WishlistItemModel(
           id: product.id,
@@ -35,9 +36,8 @@ class WIshListLocalDataSourceImpl
           addedDate: DateTime.now(),
         );
         _wishlist.add(newWishlistItem);
+        return true;
       }
-      
-      return _wishlist;
     } catch (e) {
       throw ServerException(e.toString());
     }

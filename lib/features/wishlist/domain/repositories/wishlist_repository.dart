@@ -5,6 +5,6 @@ import 'package:fpdart/fpdart.dart';
 
 abstract interface class WishlistRepository {
   Future<Either<Failure,List<WishlistItem>>> getWishList();
-  Future<Either<Failure,List<WishlistItem>>> toggleToWishlist(Product  product);
+  Future<Either<Failure,bool>> toggleToWishlist(Product  product);
   Future<Either<Failure,bool>> isWishItem(int id);
 }

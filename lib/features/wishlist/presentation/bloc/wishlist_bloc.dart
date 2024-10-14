@@ -15,7 +15,6 @@ part 'wishlist_state.dart';
 
 class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   final GetWishlist _getWishlist;
-  final ToggleWishItem _toggleWishItem;
   final IsWishItem _isWishItem;
   final DisplayWishlistCubit _displayWishlistCubit;
   WishlistBloc({
@@ -23,14 +22,14 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
     required ToggleWishItem toggleWishItem,
     required IsWishItem isWishItem,
     required DisplayWishlistCubit displayWishlistCubit,
-  })  : _toggleWishItem = toggleWishItem,
+  })  : 
         _getWishlist = getWishlist,
         _isWishItem = isWishItem,
         _displayWishlistCubit = displayWishlistCubit,
         super(WishlistInitial()) {
     on<WishlistEvent>((event, emit) => emit(WishlistLoading()));
     on<WishlistFetchAll>(_onFetchWishlist);
-    on<WishlistToggle>(_toggleToWishlist);
+    // on<WishlistToggle>(_toggleToWishlist);
     on<WishlsitIsWishItem>(_onIsWishItem);
   }
 
@@ -39,18 +38,6 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
     Emitter<WishlistState> emit,
   ) async {
     final res = await _getWishlist(NoParams());
-
-    res.fold(
-      (l) => _emitFailure(emit, l.message),
-      (r) => _emitSuccess(emit, r),
-    );
-  }
-
-  FutureOr<void> _toggleToWishlist(
-    WishlistToggle event,
-    Emitter<WishlistState> emit,
-  ) async {
-    final res = await _toggleWishItem(ToggleWishParams(product: event.product));
 
     res.fold(
       (l) => _emitFailure(emit, l.message),

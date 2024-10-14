@@ -1,9 +1,9 @@
 import 'package:fashion_flow/core/common/cubits/display_wishlist/display_wishlist_cubit.dart';
+import 'package:fashion_flow/core/common/cubits/favorite_icon_button/favorite_icon_button_cubit.dart';
 import 'package:fashion_flow/core/common/widgets/loader.dart';
 import 'package:fashion_flow/core/common/widgets/product_grid_tile.dart';
 import 'package:fashion_flow/core/utils/show_snackbar_message.dart';
 import 'package:fashion_flow/features/wishlist/presentation/bloc/wishlist_bloc.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +34,7 @@ class _WishlistPageState extends State<WishlistPage> {
             }
           },
           builder: (context, state) {
-            if (state is WishlistLoading) {
+            if (state is DisplayWishlistLoading) {
               return const Loader();
             } else if (state is DisplayWishlistSuccess) {
               return GridView.builder(
@@ -50,13 +50,23 @@ class _WishlistPageState extends State<WishlistPage> {
                 itemCount: state.wishlist.length,
                 itemBuilder: (context, index) {
                   final wishlist = state.wishlist[index];
-                  return ProductGridTile(
-                    product: wishlist.product,
-                    onFavoritePress: () {
-                      context.read<WishlistBloc>().add(
-                            WishlistToggle(product: wishlist.product),
-                          );
-                    },
+                  return BlocProvider(
+                    create: (context) =>
+                        FavoriteIconButtonCubit()..isFavorite(wishlist.id),
+                    child: BlocBuilder<FavoriteIconButtonCubit, bool>(
+                      builder: (context, state) {
+                        return ProductGridTile(
+                          product: wishlist.product,
+                          onFavoritePress: () {
+                            context
+                                .read<FavoriteIconButtonCubit>()
+                                .onTap(wishlist.product);
+                            setState(() {});
+                          },
+                          isFavotire: state,
+                        );
+                      },
+                    ),
                   );
                 },
               );

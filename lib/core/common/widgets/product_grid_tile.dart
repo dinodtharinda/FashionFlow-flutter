@@ -3,16 +3,17 @@ import 'package:fashion_flow/core/common/widgets/network_image.dart';
 import 'package:flutter/material.dart';
 
 class ProductGridTile extends StatefulWidget {
-  const ProductGridTile({
-    super.key,
-    required this.product,
-    this.onFavoritePress,
-    this.onPress,
-  });
+  const ProductGridTile(
+      {super.key,
+      required this.product,
+      this.onFavoritePress,
+      this.onPress,
+      this.isFavotire = false});
 
   final Product product;
   final VoidCallback? onFavoritePress;
   final VoidCallback? onPress;
+  final bool isFavotire;
 
   @override
   State<ProductGridTile> createState() => _ProductGridTileState();
@@ -120,8 +121,8 @@ class _ProductGridTileState extends State<ProductGridTile> {
                 shape: BoxShape.circle, color: Colors.black26),
             child: IconButton(
               onPressed: widget.onFavoritePress,
-              icon: const Icon(
-                Icons.favorite,
+              icon: Icon(
+                widget.isFavotire ? Icons.favorite : Icons.favorite_border,
                 color: Colors.white,
               ),
             ),

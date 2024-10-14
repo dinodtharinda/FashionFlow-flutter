@@ -54,6 +54,8 @@ Future<void> initDependencies() async {
   serviceLocator.registerLazySingleton(() => DisplayCatogoriesCubit());
   serviceLocator.registerLazySingleton(() => DisplayProductsCubit());
   serviceLocator.registerLazySingleton(() => DisplayWishlistCubit());
+  // serviceLocator.registerLazySingleton(() => FavoriteIconButtonCubit());
+
 
   serviceLocator
       .registerLazySingleton(() => HttpService(AppConstants.BASE_URL, sp));
