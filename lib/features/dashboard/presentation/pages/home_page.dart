@@ -57,11 +57,6 @@ class _HomePageState extends State<HomePage> {
                   title: 'logout',
                   onPress: () {
                     context.read<AuthBloc>().add(AuthLogout());
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      AuthOptionPage.route(),
-                      (route) => false,
-                    );
                   }),
             ],
           ),
@@ -70,8 +65,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
 
 class SpecialOffersWidget extends StatelessWidget {
   const SpecialOffersWidget({
