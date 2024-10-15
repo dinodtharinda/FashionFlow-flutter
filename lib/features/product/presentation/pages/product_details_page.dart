@@ -60,11 +60,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
             SizedBox(
               width: 200,
-              child: Flexible(
-                child: PrimaryButton(
-                  title: 'Add to Cart',
-                  onPress: () {},
-                ),
+              child: PrimaryButton(
+                title: 'Add to Cart',
+                onPress: () {},
               ),
             ),
           ],
