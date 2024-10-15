@@ -25,7 +25,7 @@ import 'package:fashion_flow/features/product/domain/usecases/get_all_products.d
 import 'package:fashion_flow/features/product/presentation/bloc/product_bloc.dart';
 import 'package:fashion_flow/features/wishlist/data/datasources/wishlish_local_data_source.dart';
 import 'package:fashion_flow/features/wishlist/data/repositories/wishlist_repository_impl.dart';
-import 'package:fashion_flow/features/wishlist/domain/repositories/wishlist_repository.dart';
+import 'package:fashion_flow/core/common/repositories/wishlist_repository.dart';
 import 'package:fashion_flow/features/wishlist/domain/usecases/get_wishlist.dart';
 import 'package:fashion_flow/features/wishlist/domain/usecases/is_wish_item.dart';
 import 'package:fashion_flow/features/wishlist/domain/usecases/toggle_wish_item.dart';

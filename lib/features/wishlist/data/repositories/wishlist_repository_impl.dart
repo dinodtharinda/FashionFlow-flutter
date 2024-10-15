@@ -3,7 +3,7 @@ import 'package:fashion_flow/core/error/exception.dart';
 import 'package:fashion_flow/core/error/failures.dart';
 import 'package:fashion_flow/features/wishlist/data/datasources/wishlish_local_data_source.dart';
 import 'package:fashion_flow/core/common/entities/wishlist_item.dart';
-import 'package:fashion_flow/features/wishlist/domain/repositories/wishlist_repository.dart';
+import 'package:fashion_flow/core/common/repositories/wishlist_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
 
