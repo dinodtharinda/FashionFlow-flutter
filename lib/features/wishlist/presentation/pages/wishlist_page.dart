@@ -66,7 +66,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                 .onTap(wishlist.product);
                             setState(() {});
                           },
-                          isFavotire: state,
+                          isFavotire: true,
                         );
                       },
                     ),
