@@ -1,6 +1,7 @@
 import 'package:fashion_flow/core/common/cubits/display_products/display_products_cubit.dart';
 import 'package:fashion_flow/core/common/cubits/favorite_icon_button/favorite_icon_button_cubit.dart';
 import 'package:fashion_flow/core/common/widgets/product_grid_tile.dart';
+import 'package:fashion_flow/features/product/presentation/pages/product_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -45,6 +46,12 @@ class _ProductGridWidgetState extends State<ProductGridWidget> {
                 child: BlocBuilder<FavoriteIconButtonCubit, bool>(
                   builder: (context, state) {
                     return ProductGridTile(
+                      onPress: () {
+                        Navigator.push(
+                          context,
+                          ProductDetailsPage.route(product),
+                        );
+                      },
                       isFavotire: state,
                       product: product,
                       onFavoritePress: () {
